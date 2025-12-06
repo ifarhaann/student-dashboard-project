@@ -17,11 +17,11 @@
 
     <style>
       :root {
-        /* LOGO-MATCHED COLORS: Deep Olive/Khaki Green and Rich Gold/Yellow */
-        --primary: #4a5d37; /* Deep Olive Green - Main element color */
-        --secondary: #9b7642; /* Rich Gold/Yellow - Accent and Hover color */
-        --accent: #d4e0b5; /* Light green accent for badges */
+        --primary: #4a5d37;
+        --secondary: #9b7642;
+        --accent: #d4e0b5;
         --danger: #ef476f;
+        --success: #06d6a0;
         --text-dark: #2a3d45;
         --text-light: #5d737e;
         --bg-color: #f6f8fa;
@@ -37,15 +37,19 @@
         font-family: "Inter", sans-serif;
       }
 
+      html {
+        overflow-x: hidden;
+      }
+
       body {
-        /* MODERN BACKGROUND: Subtle gradient */
         background: linear-gradient(135deg, #f0f4f8 0%, #eef1f5 100%);
         min-height: 100vh;
         color: var(--text-dark);
-        padding-top: 100px;
+        padding-top: 90px;
+        overflow-x: hidden;
       }
 
-      /* --- Header (Flexbox Layout) --- */
+      /* ===== HEADER ===== */
       header {
         background: var(--white);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -59,14 +63,13 @@
         width: 100%;
         z-index: 100;
         height: 90px;
+        overflow: hidden;
       }
 
-      /* Empty div for alignment placeholder (ensures true center for logo block) */
       .header-spacer {
         width: 130px;
       }
 
-      /* LOGO BLOCK: Centered */
       .header-logo-block {
         display: flex;
         flex-direction: column;
@@ -88,6 +91,7 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+        flex-shrink: 0;
       }
 
       .logo-title-group {
@@ -96,11 +100,13 @@
         align-items: center;
         line-height: 1.2;
       }
+      
       .logo-title {
         font-size: 1.4rem;
         font-weight: 700;
         color: var(--primary);
       }
+      
       .logo-subtitle {
         font-size: 0.9rem;
         font-weight: 500;
@@ -108,7 +114,6 @@
         margin-top: 2px;
       }
 
-      /* LIVE CLOCK: Far Right */
       .live-clock {
         color: var(--text-light);
         font-size: 0.9rem;
@@ -116,9 +121,10 @@
         text-align: right;
         line-height: 1.4;
         width: 160px;
+        flex-shrink: 0;
       }
 
-      /* --- Main Content Layout --- */
+      /* ===== MAIN CONTAINER ===== */
       .container {
         max-width: 1200px;
         margin: 30px auto;
@@ -126,15 +132,19 @@
         display: grid;
         grid-template-columns: 1fr 2fr;
         gap: 30px;
+        width: 100%;
+        overflow: hidden;
       }
 
-      /* --- Cards --- */
+      /* ===== CARDS ===== */
       .card {
         background: var(--white);
         padding: 30px;
         border-radius: var(--radius-large);
         box-shadow: var(--shadow-soft);
         transition: all 0.3s ease;
+        width: 100%;
+        overflow: hidden;
       }
 
       .card-title {
@@ -149,10 +159,19 @@
         gap: 10px;
       }
 
-      /* --- Forms & Inputs --- */
+      /* ===== FORMS ===== */
       .form-group {
         margin-bottom: 20px;
+        width: 100%;
       }
+      
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+
       .form-control {
         width: 100%;
         padding: 12px 15px;
@@ -161,14 +180,16 @@
         border-radius: 8px;
         font-size: 0.95rem;
         transition: border-color 0.3s, box-shadow 0.3s;
+        max-width: 100%;
       }
+      
       .form-control:focus {
         outline: none;
         border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(74, 93, 55, 0.1);
       }
 
-      /* --- Buttons (Color Matched) --- */
+      /* ===== BUTTONS ===== */
       .btn {
         padding: 12px 25px;
         border: none;
@@ -180,25 +201,28 @@
         align-items: center;
         justify-content: center;
         gap: 8px;
+        white-space: nowrap;
+        flex-shrink: 0;
       }
+      
       .btn-primary {
-        /* Add button: Primary Green */
         background: var(--primary);
         color: white;
         flex: 1;
       }
+      
       .btn-primary:hover {
-        /* Hover color: Secondary Gold */
         background: var(--secondary);
       }
+      
       .btn-edit {
-        /* Edit button: Secondary Gold */
         background: var(--secondary);
         color: white;
         padding: 8px 12px;
         margin: 2px;
         font-size: 0.7rem;
       }
+      
       .btn-danger {
         background: var(--danger);
         color: white;
@@ -206,29 +230,34 @@
         font-size: 0.7rem;
         margin: 2px;
       }
+      
       .btn-utility {
         background: #e9ecef;
         color: var(--text-dark);
         border: 1px solid #ddd;
       }
+      
       .btn-utility:hover {
         background: #dee2e6;
       }
+      
       .btn-clear {
-        /* Clear Form button: Distinct Gold/Yellow */
         background: #d2a857;
         color: white;
         flex: 1;
       }
+      
       .btn-clear:hover {
         background: var(--secondary);
       }
+      
       .btn-utility-danger {
         background: var(--danger);
         color: white;
         border: none;
-        padding: 10px 15px; /* Slightly smaller padding */
+        padding: 10px 15px;
       }
+      
       .btn-utility-danger:hover {
         background: #c82333;
       }
@@ -237,7 +266,9 @@
         display: flex;
         gap: 10px;
         margin-top: 10px;
+        width: 100%;
       }
+      
       .records-actions {
         display: flex;
         gap: 10px;
@@ -245,14 +276,25 @@
         margin-top: 25px;
         justify-content: space-between;
         align-items: center;
+        width: 100%;
       }
 
-      /* --- Table Styling --- */
+      /* ===== TABLE ===== */
+      .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 8px;
+        border: 1px solid #eee;
+      }
+      
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 10px;
+        margin-top: 0;
+        min-width: 600px;
       }
+      
       th {
         background-color: var(--bg-color);
         padding: 12px 15px;
@@ -260,11 +302,15 @@
         color: var(--text-light);
         font-size: 0.85rem;
         text-transform: uppercase;
+        white-space: nowrap;
       }
+      
       td {
         padding: 15px;
         border-bottom: 1px solid #f0f0f0;
+        word-break: break-word;
       }
+      
       tr:hover td {
         background-color: #fcfdff;
       }
@@ -273,186 +319,298 @@
         display: inline-block;
         padding: 4px 10px;
         border-radius: 20px;
-        /* Light primary color background with dark primary text */
         background: var(--accent);
         color: var(--primary);
         font-weight: 500;
         font-size: 0.85rem;
+        white-space: nowrap;
       }
 
-      /* ======================================================= */
-      /* --- RESPONSIVE STYLES (Mobile First) --- */
-      /* ======================================================= */
-
-      /* Medium Screens (Tablets and Smaller Desktops) */
-      @media (max-width: 992px) {
-        body {
-          padding-top: 100px;
-        }
-        header {
-          height: 100px;
-          flex-direction: column;
-          justify-content: center;
-          align-items: stretch;
-          padding: 10px; /* Reduced padding */
-        }
-        .header-spacer {
-          display: none;
-        }
-        .header-logo-block {
-          margin: 5px auto;
-          order: 1;
-        }
-        .logo-img {
-          width: 40px;
-          height: 40px;
-        }
-        .logo-title {
-          font-size: 1.2rem;
-        }
-        .logo-subtitle {
-            font-size: 0.8rem;
-        }
-        .live-clock {
-          order: 2;
-          text-align: center;
-          width: 100%;
-          font-size: 0.8rem; /* Smaller font for better fit */
-        }
-        .container {
-          grid-template-columns: 1fr;
-          margin-top: 15px;
-          padding: 0 15px; /* Reduced side padding for more content space */
-        }
-
-        .table-wrapper {
-          overflow-x: auto;
-        }
-        table {
-          min-width: 650px; /* Ensures the table is scrollable on smaller screens */
-        }
-        .records-actions {
-          flex-direction: column;
-          align-items: stretch;
-        }
-        .records-actions > div {
-          display: flex;
-          gap: 10px;
-          width: 100%;
-        }
-        .btn-utility {
-            font-size: 0.9rem; /* Slightly smaller utility button text */
-            padding: 10px 15px;
-        }
-      }
-
-      /* Small Screens (Mobile Phones) */
-      @media (max-width: 600px) {
-        body {
-          padding-top: 90px;
-        }
-        header {
-          height: 90px;
-          padding: 5px 10px;
-        }
-        .logo-title {
-          font-size: 1.1rem;
-        }
-        .logo-subtitle {
-            font-size: 0.75rem;
-        }
-        .logo-img {
-          width: 35px;
-          height: 35px;
-        }
-        .live-clock {
-            display: none; /* Hide the clock on very small screens to save space in the header */
-        }
-        .container {
-          padding: 0 10px;
-        }
-        .card {
-            padding: 20px; /* Smaller card padding */
-        }
-        .card-title {
-            font-size: 1.2rem;
-        }
-        .form-control, .btn {
-            font-size: 0.9rem;
-            padding: 10px 15px;
-        }
-        .button-group {
-            flex-direction: column; /* Stack Add/Clear buttons vertically */
-        }
-        
-        /* Table Optimization for Smallest Screens */
-        table {
-            min-width: 550px; /* Reduced minimum width */
-        }
-        th, td {
-            padding: 10px 8px; /* Reduced cell padding */
-            font-size: 0.85rem;
-        }
-        .badge-sem {
-            font-size: 0.75rem;
-            padding: 3px 8px;
-        }
-        td small {
-            font-size: 0.75rem; /* Smaller contact details */
-        }
-        .btn-edit, .btn-danger {
-            padding: 6px 8px; /* Smaller action buttons */
-            font-size: 0.65rem;
-        }
-
-        /* Records Action button stacking */
-        .records-actions {
-            gap: 5px;
-        }
-        .records-actions > div {
-            flex-direction: column; /* Stack utility buttons vertically */
-            gap: 5px;
-        }
-        .btn-utility {
-            font-size: 0.85rem;
-            padding: 8px 12px;
-        }
-      }
-
-
-      /* ======================================================= */
-      /* === FOOTER STYLES === */
-      /* ======================================================= */
+      /* ===== FOOTER ===== */
       footer {
-        background-color: var(--primary); /* Deep green color from the header/theme */
-        color: var(--accent); /* Light contrasting color */
-        padding: 20px 20px;
+        background-color: var(--primary);
+        color: var(--accent);
+        padding: 20px;
         text-align: center;
-        border-top: 5px solid var(--secondary); /* Accent line */
-        margin-top: 40px; /* Space between the main content and the footer */
+        border-top: 5px solid var(--secondary);
+        margin-top: 40px;
         font-size: 0.9rem;
         line-height: 1.6;
+        width: 100%;
       }
 
       footer p {
         margin: 0;
         padding: 2px 0;
         font-weight: 400;
+        max-width: 100%;
+        overflow-wrap: break-word;
       }
 
       footer p:last-child {
-        font-weight: 600; /* Emphasize the developer name */
+        font-weight: 600;
         margin-top: 5px;
         color: var(--white);
       }
 
-      /* Ensure the footer looks good on smaller screens too (already covered by main styles, but good to check) */
-      @media (max-width: 100%) {
-        footer {
-          padding: 15px 10px;
+      /* ===== RESPONSIVE DESIGN ===== */
+
+      /* Tablet and Medium Screens */
+      @media (max-width: 1024px) {
+        .container {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          padding: 0 15px;
+          max-width: 95%;
+        }
+        
+        .card {
+          padding: 25px;
+        }
+      }
+
+      /* Tablet Portrait */
+      @media (max-width: 768px) {
+        body {
+          padding-top: 100px;
+        }
+        
+        header {
+          height: 100px;
+          flex-direction: column;
+          padding: 10px 15px;
+        }
+        
+        .header-spacer {
+          display: none;
+        }
+        
+        .header-logo-block {
+          margin: 5px auto;
+          order: 1;
+        }
+        
+        .logo-img {
+          width: 40px;
+          height: 40px;
+        }
+        
+        .logo-title {
+          font-size: 1.2rem;
+        }
+        
+        .logo-subtitle {
           font-size: 0.8rem;
+        }
+        
+        .live-clock {
+          order: 2;
+          text-align: center;
+          width: 100%;
+          font-size: 0.9rem;
+          margin-top: 5px;
+        }
+        
+        .container {
+          margin-top: 15px;
+          grid-template-columns: 1fr;
+        }
+        
+        .card-title {
+          font-size: 1.2rem;
+        }
+        
+        .records-actions {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 15px;
+        }
+        
+        .records-actions > div {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
           width: 100%;
         }
+        
+        .btn-utility {
+          flex: 1;
+          min-width: 150px;
+        }
+        
+        .btn-utility-danger {
+          width: 100%;
+        }
+      }
+
+      /* Mobile Devices */
+      @media (max-width: 576px) {
+        body {
+          padding-top: 100px;
+        }
+        
+        .container {
+          padding: 0 10px;
+          margin: 15px auto;
+        }
+        
+        .card {
+          padding: 20px 15px;
+          border-radius: 12px;
+        }
+        
+        .card-title {
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+        }
+        
+        .button-group {
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        .btn {
+          width: 100%;
+          padding: 12px 20px;
+          font-size: 0.9rem;
+        }
+        
+        .form-control {
+          padding: 10px 12px;
+          font-size: 0.9rem;
+        }
+        
+        table {
+          min-width: 500px;
+        }
+        
+        th, td {
+          padding: 10px 8px;
+          font-size: 0.85rem;
+        }
+        
+        .btn-edit, .btn-danger {
+          padding: 6px 10px;
+          font-size: 0.65rem;
+        }
+        
+        /* Mobile table wrapper with better scroll indication */
+        .table-wrapper {
+          position: relative;
+          margin: 0 -10px;
+          width: calc(100% + 20px);
+        }
+        
+        .table-wrapper::after {
+          content: "→";
+          position: absolute;
+          right: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--primary);
+          font-size: 1.2rem;
+          opacity: 0.5;
+        }
+      }
+
+      /* Small Mobile Devices */
+      @media (max-width: 375px) {
+        header {
+          padding: 10px;
+        }
+        
+        .logo-container {
+          gap: 5px;
+        }
+        
+        .logo-title {
+          font-size: 1rem;
+        }
+        
+        .logo-subtitle {
+          font-size: 0.75rem;
+        }
+        
+        .card {
+          padding: 15px 12px;
+        }
+        
+        .card-title {
+          font-size: 1rem;
+        }
+        
+        .records-actions > div {
+          flex-direction: column;
+        }
+        
+        .btn-utility {
+          min-width: 100%;
+        }
+        
+        footer {
+          padding: 15px 10px;
+          font-size: 0.85rem;
+        }
+      }
+
+      /* Very Small Screens */
+      @media (max-width: 320px) {
+        .live-clock {
+          font-size: 0.8rem;
+        }
+        
+        .form-control {
+          font-size: 0.85rem;
+        }
+        
+        .btn {
+          font-size: 0.85rem;
+          padding: 10px 15px;
+        }
+      }
+
+      /* Large Screens */
+      @media (min-width: 1440px) {
+        .container {
+          max-width: 1400px;
+        }
+        
+        .card {
+          padding: 35px;
+        }
+      }
+
+      /* Prevent text overflow in table cells */
+      td {
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      /* Make sure dropdowns don't overflow */
+      select.form-control {
+        max-width: 100%;
+      }
+      
+      /* Status message styling */
+      .status-message {
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      
+      .status-success {
+        background-color: rgba(6, 214, 160, 0.1);
+        color: var(--success);
+        border: 1px solid var(--success);
+      }
+      
+      .status-error {
+        background-color: rgba(239, 71, 111, 0.1);
+        color: var(--danger);
+        border: 1px solid var(--danger);
       }
     </style>
   </head>
@@ -474,6 +632,7 @@
     </header>
 
     <div class="container">
+      <!-- Registration Card -->
       <div class="card" id="register">
         <h3 class="card-title">
           <i class="fas fa-user-plus"></i> Student Registration
@@ -482,7 +641,7 @@
           <input type="hidden" id="editIndex" value="-1" />
 
           <div class="form-group">
-            <label>Full Name</label>
+            <label for="name">Full Name</label>
             <input
               type="text"
               id="name"
@@ -491,8 +650,9 @@
               required
             />
           </div>
+          
           <div class="form-group">
-            <label>Roll Number</label>
+            <label for="rollNo">Roll Number</label>
             <input
               type="text"
               id="rollNo"
@@ -501,8 +661,9 @@
               required
             />
           </div>
+          
           <div class="form-group">
-            <label>Email ID</label>
+            <label for="email">Email ID</label>
             <input
               type="email"
               id="email"
@@ -510,19 +671,21 @@
               placeholder="Ex: student@college.edu"
             />
           </div>
+          
           <div class="form-group">
-            <label>Phone Number</label>
+            <label for="phone">Phone Number</label>
             <input
               type="tel"
               id="phone"
               class="form-control"
-              placeholder="Ex: 987xxxxxxx"
+              placeholder="Ex: 9876543210"
             />
           </div>
+          
           <div class="form-group">
-            <label>Semester</label>
-            <select id="semester" class="form-control">
-              <option selected disabled>Select Semester</option>
+            <label for="semester">Semester</label>
+            <select id="semester" class="form-control" required>
+              <option value="" selected disabled>Select Semester</option>
               <option>1st Sem</option>
               <option>2nd Sem</option>
               <option>3rd Sem</option>
@@ -543,19 +706,21 @@
         </form>
       </div>
 
-      <div class="card" id="records" style="grid-column: span 1 / auto">
+      <!-- Records Card -->
+      <div class="card" id="records">
         <h3 class="card-title"><i class="fas fa-table"></i> Student Records</h3>
 
-        <div style="display: flex; gap: 10px; margin-bottom: 20px">
+        <!-- Search and Filter -->
+        <div class="search-filter-container" style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
           <input
             type="text"
             id="searchInput"
             class="form-control"
             placeholder="Search by Name or Roll No..."
-            style="flex: 1"
+            style="flex: 1; min-width: 200px;"
           />
-          <select id="filterSem" class="form-control" style="width: 150px">
-            <option value="">Semester</option>
+          <select id="filterSem" class="form-control" style="width: 150px;">
+            <option value="">All Semesters</option>
             <option>1st Sem</option>
             <option>2nd Sem</option>
             <option>3rd Sem</option>
@@ -565,6 +730,7 @@
           </select>
         </div>
 
+        <!-- Table -->
         <div class="table-wrapper">
           <table id="studentTable">
             <thead>
@@ -576,84 +742,112 @@
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              <!-- Data will be inserted here by JavaScript -->
+            </tbody>
           </table>
         </div>
 
+        <!-- Count Display -->
+        <div class="student-count" style="margin-top: 15px; color: var(--text-light); font-size: 0.9rem;">
+          Total Students: <span id="totalCount">0</span> | Showing: <span id="showingCount">0</span>
+        </div>
+
+        <!-- Action Buttons -->
         <div class="records-actions">
-          <div style="display: flex; gap: 10px">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <button class="btn btn-utility" id="fetchApiBtn">
-              <i class="fas fa-cloud-download-alt"></i> Load External Data
-              (AJAX)
+              <i class="fas fa-cloud-download-alt"></i> Load Data
             </button>
             <button class="btn btn-utility" id="exportBtn">
-              <i class="fas fa-file-export"></i> Export to JSON
+              <i class="fas fa-file-export"></i> Export JSON
             </button>
           </div>
           <button class="btn btn-utility-danger" id="clearRecordsBtn">
-            <i class="fas fa-database"></i> Clear all Records
+            <i class="fas fa-database"></i> Clear All
           </button>
         </div>
-        <div
-          id="ajaxStatus"
-          style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light)"
-        ></div>
+        
+        <!-- Status Messages -->
+        <div id="ajaxStatus" class="status-message"></div>
       </div>
     </div>
 
+    <!-- Hidden file input for import (if needed in future) -->
+    <input type="file" id="importFile" accept=".json" style="display: none;">
+
     <script>
-      // Data storage using JavaScript Array of Objects (NO DATABASE)
+      // ===== GLOBAL VARIABLES =====
       let students = [];
       const STORAGE_KEY = "gcw_student_data";
+      let isFiltering = false;
+      let currentFilteredData = [];
 
-      // --- LOCAL STORAGE FUNCTIONS ---
+      // ===== UTILITY FUNCTIONS =====
+      function showStatus(message, type = 'info') {
+        const statusDiv = document.getElementById('ajaxStatus');
+        statusDiv.textContent = message;
+        statusDiv.className = 'status-message';
+        
+        if (type === 'success') {
+          statusDiv.classList.add('status-success');
+        } else if (type === 'error') {
+          statusDiv.classList.add('status-error');
+        }
+        
+        // Auto-hide after 3 seconds
+        setTimeout(() => {
+          statusDiv.textContent = '';
+          statusDiv.className = 'status-message';
+        }, 3000);
+      }
 
-      // Loads data from localStorage on dashboard startup
+      function updateCount() {
+        const total = students.length;
+        const showing = isFiltering ? currentFilteredData.length : total;
+        
+        document.getElementById('totalCount').textContent = total;
+        document.getElementById('showingCount').textContent = showing;
+      }
+
+      // ===== LOCAL STORAGE FUNCTIONS =====
       function loadStudents() {
-        const data = localStorage.getItem(STORAGE_KEY);
-        if (data) {
-          // Parse JSON string back into the JavaScript array
-          students = JSON.parse(data);
-        } else {
+        try {
+          const data = localStorage.getItem(STORAGE_KEY);
+          if (data) {
+            students = JSON.parse(data);
+            showStatus('Data loaded successfully', 'success');
+          } else {
+            students = [];
+          }
+        } catch (error) {
+          console.error('Error loading data:', error);
           students = [];
+          showStatus('Error loading saved data', 'error');
         }
         renderTable();
+        updateCount();
       }
 
-      // Saves the current students array to localStorage
       function saveStudents() {
-        // Convert JavaScript array to JSON string for storage
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
+        } catch (error) {
+          console.error('Error saving data:', error);
+          showStatus('Error saving data', 'error');
+        }
       }
 
-      // Clears all records from the array and localStorage
-      document
-        .getElementById("clearRecordsBtn")
-        .addEventListener("click", function () {
-          if (
-            confirm(
-              "Are you sure you want to permanently clear ALL saved student records? This action cannot be undone."
-            )
-          ) {
-            students = [];
-            localStorage.removeItem(STORAGE_KEY);
-            renderTable();
-            alert(
-              "All records have been cleared from the dashboard and persistent storage."
-            );
-          }
-        });
-
-      // --- CORE UI/FORM FUNCTIONS ---
-
-      window.clearForm = function () {
+      // ===== UI FUNCTIONS =====
+      function clearForm() {
         document.getElementById("studentForm").reset();
         document.getElementById("editIndex").value = "-1";
-        document.getElementById("submitBtn").innerHTML =
-          '<i class="fas fa-plus-circle"></i> Add Student';
-        document.getElementById("submitBtn").classList.remove("btn-edit");
-        document.getElementById("submitBtn").classList.add("btn-primary");
-      };
+        const btn = document.getElementById("submitBtn");
+        btn.innerHTML = '<i class="fas fa-plus-circle"></i> Add Student';
+        btn.classList.remove("btn-edit");
+        btn.classList.add("btn-primary");
+        showStatus('Form cleared', 'info');
+      }
 
       function updateTime() {
         const now = new Date();
@@ -667,86 +861,121 @@
           day: "numeric",
           year: "numeric",
         });
-        document.getElementById(
-          "clock"
-        ).innerHTML = `Time: ${time}<br>Date: ${date}`;
+        document.getElementById("clock").innerHTML = `Time: ${time}<br>Date: ${date}`;
       }
-      setInterval(updateTime, 1000);
-      updateTime();
 
+      // ===== TABLE FUNCTIONS =====
       function renderTable(data = students) {
         const tbody = document.querySelector("#studentTable tbody");
         tbody.innerHTML = "";
+        
+        isFiltering = data !== students;
+        currentFilteredData = data;
 
         if (data.length === 0) {
-          tbody.innerHTML =
-            '<tr><td colspan="5" style="text-align:center; padding: 20px; color: var(--danger); font-weight: 500;">No student records found. Add a student using the form or load external data.</td></tr>';
+          const noDataMessage = isFiltering 
+            ? "No students match your search criteria. Try a different search."
+            : "No student records found. Add a student using the form.";
+            
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="5" style="text-align:center; padding: 30px; color: var(--text-light);">
+                <i class="fas fa-users-slash" style="font-size: 2rem; margin-bottom: 10px; display: block; opacity: 0.5;"></i>
+                ${noDataMessage}
+              </td>
+            </tr>`;
+          updateCount(data.length);
           return;
         }
 
         data.forEach((student, index) => {
-          const originalIndex = students.indexOf(student);
-
-          const details =
-            student.email || student.phone
-              ? `<small><i class="fas fa-envelope"></i> ${
-                  student.email || "N/A"
-                }</small><br>` +
-                `<small><i class="fas fa-phone"></i> ${
-                  student.phone || "N/A"
-                }</small>`
-              : "No details";
+          const originalIndex = students.findIndex(s => s.rollNo === student.rollNo);
+          
+          const details = `
+            <div style="line-height: 1.4; font-size: 0.85rem;">
+              <div><i class="fas fa-envelope"></i> ${student.email || "N/A"}</div>
+              <div><i class="fas fa-phone"></i> ${student.phone || "N/A"}</div>
+            </div>
+          `;
 
           const row = `
-              <tr>
-                <td>#${student.rollNo}</td>
-                <td style="font-weight: 500;">${student.name}</td>
-                <td><span class="badge-sem">${
-                  student.semester || "N/A"
-                }</span></td>
-                <td>${details}</td>
-                <td>
-                  <button class="btn btn-edit" onclick="editStudent(${originalIndex})"><i class="fas fa-edit"></i></button>
-                  <button class="btn btn-danger" onclick="deleteStudent(${originalIndex})"><i class="fas fa-trash"></i></button>
-                </td>
-              </tr>
-            `;
+            <tr>
+              <td><strong style="color: var(--primary);">${student.rollNo}</strong></td>
+              <td style="font-weight: 500;">${student.name}</td>
+              <td><span class="badge-sem">${student.semester}</span></td>
+              <td>${details}</td>
+              <td>
+                <div style="display: flex; gap: 5px;">
+                  <button class="btn btn-edit" onclick="editStudent(${originalIndex})" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-danger" onclick="deleteStudent(${originalIndex})" title="Delete">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `;
           tbody.innerHTML += row;
         });
+        
+        updateCount(data.length);
       }
 
-      document
-        .getElementById("studentForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+      // ===== STUDENT OPERATIONS =====
+      function addOrUpdateStudent(e) {
+        e.preventDefault();
 
-          const name = document.getElementById("name").value;
-          const rollNo = document.getElementById("rollNo").value;
-          const email = document.getElementById("email").value;
-          const phone = document.getElementById("phone").value;
-          const semester = document.getElementById("semester").value;
-          const editIndex = document.getElementById("editIndex").value;
+        const name = document.getElementById("name").value.trim();
+        const rollNo = document.getElementById("rollNo").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const semester = document.getElementById("semester").value;
+        const editIndex = parseInt(document.getElementById("editIndex").value);
 
-          if (semester === "Select Semester") {
-            alert("Please select a valid Semester.");
+        // Validation
+        if (!name || !rollNo || !semester) {
+          showStatus('Please fill all required fields', 'error');
+          return;
+        }
+
+        // Check for duplicate roll number when adding new student
+        if (editIndex === -1) {
+          const exists = students.some(student => student.rollNo === rollNo);
+          if (exists) {
+            showStatus('Roll number already exists!', 'error');
             return;
           }
+        }
 
-          const studentData = { name, rollNo, email, phone, semester };
+        const studentData = { name, rollNo, email, phone, semester };
 
-          if (editIndex === "-1") {
-            students.push(studentData); // Add new student
-          } else {
-            students[editIndex] = studentData; // Update existing student
-            clearForm();
-          }
+        if (editIndex === -1) {
+          students.push(studentData);
+          showStatus('Student added successfully!', 'success');
+        } else {
+          students[editIndex] = studentData;
+          showStatus('Student updated successfully!', 'success');
+        }
 
-          this.reset();
-          saveStudents(); // Save to Local Storage
-          renderTable();
-        });
+        saveStudents();
+        renderTable();
+        
+        if (editIndex === -1) {
+          document.getElementById("studentForm").reset();
+        } else {
+          clearForm();
+        }
 
-      window.editStudent = function (index) {
+        // Update search if active
+        if (isFiltering) {
+          filterData();
+        }
+      }
+
+      function editStudent(index) {
+        if (index < 0 || index >= students.length) return;
+        
         const s = students[index];
         document.getElementById("name").value = s.name;
         document.getElementById("rollNo").value = s.rollNo;
@@ -756,45 +985,49 @@
         document.getElementById("editIndex").value = index;
 
         const btn = document.getElementById("submitBtn");
-        btn.innerHTML = '<i class="fas fa-save"></i> Update Record';
+        btn.innerHTML = '<i class="fas fa-save"></i> Update Student';
         btn.classList.remove("btn-primary");
         btn.classList.add("btn-edit");
-        document
-          .getElementById("register")
-          .scrollIntoView({ behavior: "smooth" });
-      };
+        
+        document.getElementById("register").scrollIntoView({ behavior: "smooth" });
+        showStatus('Editing student record', 'info');
+      }
 
-      window.deleteStudent = function (index) {
-        if (confirm("Confirm deletion of this record?")) {
+      function deleteStudent(index) {
+        if (index < 0 || index >= students.length) return;
+        
+        if (confirm("Are you sure you want to delete this student record?")) {
+          const deletedStudent = students[index];
           students.splice(index, 1);
-          saveStudents(); // Save to Local Storage
+          saveStudents();
           renderTable();
+          showStatus(`Deleted: ${deletedStudent.name}`, 'success');
         }
-      };
+      }
 
       function filterData() {
-        const query = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
+        const query = document.getElementById("searchInput").value.toLowerCase();
         const sem = document.getElementById("filterSem").value;
 
         const filtered = students.filter((s) => {
-          const matchesSearch =
-            s.name.toLowerCase().includes(query) || s.rollNo.includes(query);
+          const matchesSearch = 
+            s.name.toLowerCase().includes(query) || 
+            s.rollNo.toLowerCase().includes(query);
           const matchesSem = sem === "" || s.semester === sem;
           return matchesSearch && matchesSem;
         });
+        
         renderTable(filtered);
       }
-      document
-        .getElementById("searchInput")
-        .addEventListener("input", filterData);
-      document
-        .getElementById("filterSem")
-        .addEventListener("change", filterData);
 
-      $("#fetchApiBtn").click(function () {
-        $("#ajaxStatus").text("Fetching external data...");
+      // ===== DATA IMPORT/EXPORT =====
+      function loadExternalData() {
+        const btn = document.getElementById("fetchApiBtn");
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        btn.disabled = true;
+        
+        showStatus('Fetching external data...', 'info');
 
         $.ajax({
           url: "https://jsonplaceholder.typicode.com/users?_limit=3",
@@ -802,46 +1035,103 @@
           success: function (data) {
             const apiStudents = data.map((user, i) => ({
               name: user.name,
-              rollNo: "API-" + user.id,
+              rollNo: "API-" + (Date.now() + i).toString().slice(-6),
               email: user.email,
-              phone: user.phone.split(" ")[0],
-              semester: ["2nd Sem", "4th Sem", "6th Sem"][i % 3],
+              phone: user.phone.split(" ")[0] || "9876543210",
+              semester: ["1st Sem", "3rd Sem", "5th Sem"][i % 3],
             }));
 
             students = [...students, ...apiStudents];
-            saveStudents(); // Save to Local Storage
+            saveStudents();
             renderTable();
-            $("#ajaxStatus").text(
-              `Success! ${apiStudents.length} external records loaded.`
-            );
+            showStatus(`Loaded ${apiStudents.length} external records`, 'success');
           },
           error: function () {
-            $("#ajaxStatus").text(
-              "Error fetching data. Check internet connection."
-            );
+            showStatus('Error: Check internet connection', 'error');
           },
+          complete: function () {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }
+        });
+      }
+
+      function exportToJSON() {
+        if (students.length === 0) {
+          showStatus('No data to export!', 'error');
+          return;
+        }
+        
+        const dataStr = JSON.stringify(students, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `gcw_students_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showStatus('Data exported successfully!', 'success');
+      }
+
+      function clearAllRecords() {
+        if (students.length === 0) {
+          showStatus('No records to clear', 'info');
+          return;
+        }
+        
+        if (confirm("Are you sure you want to permanently clear ALL student records? This action cannot be undone.")) {
+          students = [];
+          localStorage.removeItem(STORAGE_KEY);
+          renderTable();
+          showStatus('All records cleared', 'success');
+        }
+      }
+
+      // ===== EVENT LISTENERS =====
+      document.addEventListener('DOMContentLoaded', function() {
+        // Form submission
+        document.getElementById("studentForm").addEventListener("submit", addOrUpdateStudent);
+        
+        // Search and filter
+        document.getElementById("searchInput").addEventListener("input", filterData);
+        document.getElementById("filterSem").addEventListener("change", filterData);
+        
+        // Button actions
+        document.getElementById("fetchApiBtn").addEventListener("click", loadExternalData);
+        document.getElementById("exportBtn").addEventListener("click", exportToJSON);
+        document.getElementById("clearRecordsBtn").addEventListener("click", clearAllRecords);
+        
+        // Initialize
+        loadStudents();
+        setInterval(updateTime, 1000);
+        updateTime();
+        
+        // Prevent form submission on Enter in search
+        document.getElementById("searchInput").addEventListener("keypress", function(e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
         });
       });
 
-      document
-        .getElementById("exportBtn")
-        .addEventListener("click", function () {
-          if (students.length === 0) {
-            alert("No data to export!");
-            return;
-          }
-          const dataStr =
-            "data:text/json;charset=utf-8," +
-            encodeURIComponent(JSON.stringify(students, null, 2));
-          const a = document.createElement("a");
-          a.href = dataStr;
-          a.download = "student_data_export.json";
-          a.click();
-        });
-
-      // Initialize: Load data from Local Storage when the script runs
-      loadStudents();
+      // Handle window resize for better mobile experience
+      window.addEventListener('resize', function() {
+        // Update table layout on resize
+        const tableWrapper = document.querySelector('.table-wrapper');
+        if (window.innerWidth < 576) {
+          tableWrapper.style.margin = '0 -10px';
+          tableWrapper.style.width = 'calc(100% + 20px)';
+        } else {
+          tableWrapper.style.margin = '0';
+          tableWrapper.style.width = '100%';
+        }
+      });
     </script>
+    
     <footer>
       <p>&copy; 2023 Smart Student Dashboard</p>
       <p>All rights reserved.</p>
@@ -849,5 +1139,3 @@
     </footer>
   </body>
 </html>
-
-

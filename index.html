@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GCW Srinagar Student Dashboard</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <style>
+      :root {
+        /* LOGO-MATCHED COLORS: Deep Olive/Khaki Green and Rich Gold/Yellow */
+        --primary: #4a5d37; /* Deep Olive Green - Main element color */
+        --secondary: #9b7642; /* Rich Gold/Yellow - Accent and Hover color */
+        --accent: #d4e0b5; /* Light green accent for badges */
+        --danger: #ef476f;
+        --text-dark: #2a3d45;
+        --text-light: #5d737e;
+        --bg-color: #f6f8fa;
+        --white: #ffffff;
+        --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+        --radius-large: 16px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      body {
+        /* MODERN BACKGROUND: Subtle gradient */
+        background: linear-gradient(135deg, #f0f4f8 0%, #eef1f5 100%);
+        min-height: 100vh;
+        color: var(--text-dark);
+        padding-top: 100px;
+      }
+
+      /* --- Header (Flexbox Layout) --- */
+      header {
+        background: var(--white);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        height: 90px;
+      }
+
+      /* Empty div for alignment placeholder (ensures true center for logo block) */
+      .header-spacer {
+        width: 130px;
+      }
+
+      /* LOGO BLOCK: Centered */
+      .header-logo-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-img {
+        width: 50px;
+        height: 50px;
+        background-image: url("https://upload.wikimedia.org/wikipedia/en/7/7c/Government_College_for_Women_Srinagar_MA_Road_Logo.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .logo-title-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        line-height: 1.2;
+      }
+      .logo-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      .logo-subtitle {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-dark);
+        margin-top: 2px;
+      }
+
+      /* LIVE CLOCK: Far Right */
+      .live-clock {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-align: right;
+        line-height: 1.4;
+        width: 160px;
+      }
+
+      /* --- Main Content Layout --- */
+      .container {
+        max-width: 1200px;
+        margin: 30px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 30px;
+      }
+
+      /* --- Cards --- */
+      .card {
+        background: var(--white);
+        padding: 30px;
+        border-radius: var(--radius-large);
+        box-shadow: var(--shadow-soft);
+        transition: all 0.3s ease;
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--primary);
+        margin-bottom: 25px;
+        border-bottom: 2px solid var(--bg-color);
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      /* --- Forms & Inputs --- */
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        background: #fcfdff;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(74, 93, 55, 0.1);
+      }
+
+      /* --- Buttons (Color Matched) --- */
+      .btn {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .btn-primary {
+        /* Add button: Primary Green */
+        background: var(--primary);
+        color: white;
+        flex: 1;
+      }
+      .btn-primary:hover {
+        /* Hover color: Secondary Gold */
+        background: var(--secondary);
+      }
+      .btn-edit {
+        /* Edit button: Secondary Gold */
+        background: var(--secondary);
+        color: white;
+        padding: 8px 12px;
+        margin: 2px;
+        font-size: 0.7rem;
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: white;
+        padding: 8px 12px;
+        font-size: 0.7rem;
+        margin: 2px;
+      }
+      .btn-utility {
+        background: #e9ecef;
+        color: var(--text-dark);
+        border: 1px solid #ddd;
+      }
+      .btn-utility:hover {
+        background: #dee2e6;
+      }
+      .btn-clear {
+        /* Clear Form button: Distinct Gold/Yellow */
+        background: #d2a857;
+        color: white;
+        flex: 1;
+      }
+      .btn-clear:hover {
+        background: var(--secondary);
+      }
+      .btn-utility-danger {
+        background: var(--danger);
+        color: white;
+        border: none;
+        padding: 10px 15px; /* Slightly smaller padding */
+      }
+      .btn-utility-danger:hover {
+        background: #c82333;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .records-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* --- Table Styling --- */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th {
+        background-color: var(--bg-color);
+        padding: 12px 15px;
+        text-align: left;
+        color: var(--text-light);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+      }
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      tr:hover td {
+        background-color: #fcfdff;
+      }
+
+      .badge-sem {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        /* Light primary color background with dark primary text */
+        background: var(--accent);
+        color: var(--primary);
+        font-weight: 500;
+        font-size: 0.85rem;
+      }
+
+      /* --- Responsive Styles (Mobile First) --- */
+      @media (max-width: 992px) {
+        body {
+          padding-top: 100px;
+        }
+        header {
+          height: 100px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: stretch;
+        }
+        .header-spacer {
+          display: none;
+        }
+        .header-logo-block {
+          margin: 5px auto;
+          order: 1;
+        }
+        .logo-img {
+          width: 40px;
+          height: 40px;
+        }
+        .logo-title {
+          font-size: 1.2rem;
+        }
+        .live-clock {
+          order: 2;
+          text-align: center;
+          width: 100%;
+          font-size: 0.9rem;
+        }
+        .container {
+          grid-template-columns: 1fr;
+          margin-top: 15px;
+        }
+
+        .table-wrapper {
+          overflow-x: auto;
+        }
+        table {
+          min-width: 650px;
+        }
+        .records-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .records-actions > div {
+          display: flex;
+          gap: 10px;
+          width: 100%;
+        }
+      }
+      /* ======================================================= */
+/* === FOOTER STYLES === */
+/* ======================================================= */
+footer {
+    background-color: var(--primary); /* Deep green color from the header/theme */
+    color: var(--accent); /* Light contrasting color */
+    padding: 20px 20px;
+    text-align: center;
+    border-top: 5px solid var(--secondary); /* Accent line */
+    margin-top: 40px; /* Space between the main content and the footer */
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+footer p {
+    margin: 0;
+    padding: 2px 0;
+    font-weight: 400;
+}
+
+footer p:last-child {
+    font-weight: 600; /* Emphasize the developer name */
+    margin-top: 5px;
+    color: var(--white);
+}
+
+/* Ensure the footer looks good on smaller screens too (already covered by main styles, but good to check) */
+@media (max-width: 600px) {
+    footer {
+        padding: 15px 10px;
+        font-size: 0.85rem;
+    }
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-spacer"></div>
+
+      <div class="header-logo-block">
+        <div class="logo-container">
+          <div class="logo-img" aria-hidden="true"></div>
+          <div class="logo-title-group">
+            <span class="logo-title">GCW Srinagar</span>
+            <span class="logo-subtitle">Student Dashboard</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="live-clock" id="clock">Loading Time...</div>
+    </header>
+
+    <div class="container">
+      <div class="card" id="register">
+        <h3 class="card-title">
+          <i class="fas fa-user-plus"></i> Student Registration
+        </h3>
+        <form id="studentForm">
+          <input type="hidden" id="editIndex" value="-1" />
+
+          <div class="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder="Ex: Aamina Rashid"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Roll Number</label>
+            <input
+              type="text"
+              id="rollNo"
+              class="form-control"
+              placeholder="Ex: 2025001"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email ID</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              placeholder="Ex: student@college.edu"
+            />
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              class="form-control"
+              placeholder="Ex: 987xxxxxxx"
+            />
+          </div>
+          <div class="form-group">
+            <label>Semester</label>
+            <select id="semester" class="form-control">
+              <option selected disabled>Select Semester</option>
+              <option>1st Sem</option>
+              <option>2nd Sem</option>
+              <option>3rd Sem</option>
+              <option>4th Sem</option>
+              <option>5th Sem</option>
+              <option>6th Sem</option>
+            </select>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+              <i class="fas fa-plus-circle"></i> Add Student
+            </button>
+            <button type="button" class="btn btn-clear" onclick="clearForm()">
+              <i class="fas fa-eraser"></i> Clear Form
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card" id="records" style="grid-column: span 1 / auto">
+        <h3 class="card-title"><i class="fas fa-table"></i> Student Records</h3>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 20px">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Search by Name or Roll No..."
+            style="flex: 1"
+          />
+          <select id="filterSem" class="form-control" style="width: 150px">
+            <option value="">Semester</option>
+            <option>1st Sem</option>
+            <option>3rd Sem</option>
+            <option>5th Sem</option>
+          </select>
+        </div>
+
+        <div class="table-wrapper">
+          <table id="studentTable">
+            <thead>
+              <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Semester</th>
+                <th>Contact Details</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="records-actions">
+          <div style="display: flex; gap: 10px">
+            <button class="btn btn-utility" id="fetchApiBtn">
+              <i class="fas fa-cloud-download-alt"></i> Load External Data
+              (AJAX)
+            </button>
+            <button class="btn btn-utility" id="exportBtn">
+              <i class="fas fa-file-export"></i> Export to JSON
+            </button>
+          </div>
+          <button class="btn btn-utility-danger" id="clearRecordsBtn">
+            <i class="fas fa-database"></i> Clear all Records
+          </button>
+        </div>
+        <div
+          id="ajaxStatus"
+          style="margin-top: 10px; font-size: 0.9rem; color: var(--text-light)"
+        ></div>
+      </div>
+    </div>
+
+    <script>
+      // Data storage using JavaScript Array of Objects (NO DATABASE)
+      let students = [];
+      const STORAGE_KEY = "gcw_student_data";
+
+      // --- LOCAL STORAGE FUNCTIONS ---
+
+      // Loads data from localStorage on dashboard startup
+      function loadStudents() {
+        const data = localStorage.getItem(STORAGE_KEY);
+        if (data) {
+          // Parse JSON string back into the JavaScript array
+          students = JSON.parse(data);
+        } else {
+          students = [];
+        }
+        renderTable();
+      }
+
+      // Saves the current students array to localStorage
+      function saveStudents() {
+        // Convert JavaScript array to JSON string for storage
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
+      }
+
+      // Clears all records from the array and localStorage
+      document
+        .getElementById("clearRecordsBtn")
+        .addEventListener("click", function () {
+          if (
+            confirm(
+              "Are you sure you want to permanently clear ALL saved student records? This action cannot be undone."
+            )
+          ) {
+            students = [];
+            localStorage.removeItem(STORAGE_KEY);
+            renderTable();
+            alert(
+              "All records have been cleared from the dashboard and persistent storage."
+            );
+          }
+        });
+
+      // --- CORE UI/FORM FUNCTIONS ---
+
+      window.clearForm = function () {
+        document.getElementById("studentForm").reset();
+        document.getElementById("editIndex").value = "-1";
+        document.getElementById("submitBtn").innerHTML =
+          '<i class="fas fa-plus-circle"></i> Add Student';
+        document.getElementById("submitBtn").classList.remove("btn-edit");
+        document.getElementById("submitBtn").classList.add("btn-primary");
+      };
+
+      function updateTime() {
+        const now = new Date();
+        const time = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+        const date = now.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+        document.getElementById(
+          "clock"
+        ).innerHTML = `Time: ${time}<br>Date: ${date}`;
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+
+      function renderTable(data = students) {
+        const tbody = document.querySelector("#studentTable tbody");
+        tbody.innerHTML = "";
+
+        if (data.length === 0) {
+          tbody.innerHTML =
+            '<tr><td colspan="5" style="text-align:center; padding: 20px; color: var(--danger); font-weight: 500;">No student records found. Add a student using the form or load external data.</td></tr>';
+          return;
+        }
+
+        data.forEach((student, index) => {
+          const originalIndex = students.indexOf(student);
+
+          const details =
+            student.email || student.phone
+              ? `<small><i class="fas fa-envelope"></i> ${
+                  student.email || "N/A"
+                }</small><br>` +
+                `<small><i class="fas fa-phone"></i> ${
+                  student.phone || "N/A"
+                }</small>`
+              : "No details";
+
+          const row = `
+                    <tr>
+                        <td>#${student.rollNo}</td>
+                        <td style="font-weight: 500;">${student.name}</td>
+                        <td><span class="badge-sem">${
+                          student.semester || "N/A"
+                        }</span></td>
+                        <td>${details}</td>
+                        <td>
+                            <button class="btn btn-edit" onclick="editStudent(${originalIndex})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-danger" onclick="deleteStudent(${originalIndex})"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+          tbody.innerHTML += row;
+        });
+      }
+
+      document
+        .getElementById("studentForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const rollNo = document.getElementById("rollNo").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+          const semester = document.getElementById("semester").value;
+          const editIndex = document.getElementById("editIndex").value;
+
+          if (semester === "Select Semester") {
+            alert("Please select a valid Semester.");
+            return;
+          }
+
+          const studentData = { name, rollNo, email, phone, semester };
+
+          if (editIndex === "-1") {
+            students.push(studentData); // Add new student
+          } else {
+            students[editIndex] = studentData; // Update existing student
+            clearForm();
+          }
+
+          this.reset();
+          saveStudents(); // Save to Local Storage
+          renderTable();
+        });
+
+      window.editStudent = function (index) {
+        const s = students[index];
+        document.getElementById("name").value = s.name;
+        document.getElementById("rollNo").value = s.rollNo;
+        document.getElementById("email").value = s.email;
+        document.getElementById("phone").value = s.phone;
+        document.getElementById("semester").value = s.semester;
+        document.getElementById("editIndex").value = index;
+
+        const btn = document.getElementById("submitBtn");
+        btn.innerHTML = '<i class="fas fa-save"></i> Update Record';
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-edit");
+        document
+          .getElementById("register")
+          .scrollIntoView({ behavior: "smooth" });
+      };
+
+      window.deleteStudent = function (index) {
+        if (confirm("Confirm deletion of this record?")) {
+          students.splice(index, 1);
+          saveStudents(); // Save to Local Storage
+          renderTable();
+        }
+      };
+
+      function filterData() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const sem = document.getElementById("filterSem").value;
+
+        const filtered = students.filter((s) => {
+          const matchesSearch =
+            s.name.toLowerCase().includes(query) || s.rollNo.includes(query);
+          const matchesSem = sem === "" || s.semester === sem;
+          return matchesSearch && matchesSem;
+        });
+        renderTable(filtered);
+      }
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterData);
+      document
+        .getElementById("filterSem")
+        .addEventListener("change", filterData);
+
+      $("#fetchApiBtn").click(function () {
+        $("#ajaxStatus").text("Fetching external data...");
+
+        $.ajax({
+          url: "https://jsonplaceholder.typicode.com/users?_limit=3",
+          method: "GET",
+          success: function (data) {
+            const apiStudents = data.map((user, i) => ({
+              name: user.name,
+              rollNo: "API-" + user.id,
+              email: user.email,
+              phone: user.phone.split(" ")[0],
+              semester: ["2nd Sem", "4th Sem", "6th Sem"][i % 3],
+            }));
+
+            students = [...students, ...apiStudents];
+            saveStudents(); // Save to Local Storage
+            renderTable();
+            $("#ajaxStatus").text(
+              `Success! ${apiStudents.length} external records loaded.`
+            );
+          },
+          error: function () {
+            $("#ajaxStatus").text(
+              "Error fetching data. Check internet connection."
+            );
+          },
+        });
+      });
+
+      document
+        .getElementById("exportBtn")
+        .addEventListener("click", function () {
+          if (students.length === 0) {
+            alert("No data to export!");
+            return;
+          }
+          const dataStr =
+            "data:text/json;charset=utf-8," +
+            encodeURIComponent(JSON.stringify(students, null, 2));
+          const a = document.createElement("a");
+          a.href = dataStr;
+          a.download = "student_data_export.json";
+          a.click();
+        });
+
+      // Initialize: Load data from Local Storage when the script runs
+      loadStudents();
+    </script>
+    <footer>
+      <p>&copy; 2023 Smart Student Dashboard</p>
+      <p>All rights reserved.</p>
+      <p>Developed by Ali</p>
+    </footer>
+  </body>
+</html>

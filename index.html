@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
 
-  
+    <style>
       :root {
         /* LOGO-MATCHED COLORS: Deep Olive/Khaki Green and Rich Gold/Yellow */
         --primary: #4a5d37; /* Deep Olive Green - Main element color */
@@ -46,7 +46,7 @@
       }
 
       /* --- Header (Flexbox Layout) --- */
-       {
+      header {
         background: var(--white);
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         padding: 10px 20px;
@@ -280,7 +280,11 @@
         font-size: 0.85rem;
       }
 
-      /* --- Responsive Styles (Mobile First) --- */
+      /* ======================================================= */
+      /* --- RESPONSIVE STYLES (Mobile First) --- */
+      /* ======================================================= */
+
+      /* Medium Screens (Tablets and Smaller Desktops) */
       @media (max-width: 992px) {
         body {
           padding-top: 100px;
@@ -290,6 +294,7 @@
           flex-direction: column;
           justify-content: center;
           align-items: stretch;
+          padding: 10px; /* Reduced padding */
         }
         .header-spacer {
           display: none;
@@ -305,22 +310,26 @@
         .logo-title {
           font-size: 1.2rem;
         }
+        .logo-subtitle {
+            font-size: 0.8rem;
+        }
         .live-clock {
           order: 2;
           text-align: center;
           width: 100%;
-          font-size: 0.9rem;
+          font-size: 0.8rem; /* Smaller font for better fit */
         }
         .container {
           grid-template-columns: 1fr;
           margin-top: 15px;
+          padding: 0 15px; /* Reduced side padding for more content space */
         }
 
         .table-wrapper {
           overflow-x: auto;
         }
         table {
-          min-width: 650px;
+          min-width: 650px; /* Ensures the table is scrollable on smaller screens */
         }
         .records-actions {
           flex-direction: column;
@@ -331,40 +340,119 @@
           gap: 10px;
           width: 100%;
         }
+        .btn-utility {
+            font-size: 0.9rem; /* Slightly smaller utility button text */
+            padding: 10px 15px;
+        }
       }
+
+      /* Small Screens (Mobile Phones) */
+      @media (max-width: 600px) {
+        body {
+          padding-top: 90px;
+        }
+        header {
+          height: 90px;
+          padding: 5px 10px;
+        }
+        .logo-title {
+          font-size: 1.1rem;
+        }
+        .logo-subtitle {
+            font-size: 0.75rem;
+        }
+        .logo-img {
+          width: 35px;
+          height: 35px;
+        }
+        .live-clock {
+            display: none; /* Hide the clock on very small screens to save space in the header */
+        }
+        .container {
+          padding: 0 10px;
+        }
+        .card {
+            padding: 20px; /* Smaller card padding */
+        }
+        .card-title {
+            font-size: 1.2rem;
+        }
+        .form-control, .btn {
+            font-size: 0.9rem;
+            padding: 10px 15px;
+        }
+        .button-group {
+            flex-direction: column; /* Stack Add/Clear buttons vertically */
+        }
+        
+        /* Table Optimization for Smallest Screens */
+        table {
+            min-width: 550px; /* Reduced minimum width */
+        }
+        th, td {
+            padding: 10px 8px; /* Reduced cell padding */
+            font-size: 0.85rem;
+        }
+        .badge-sem {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+        }
+        td small {
+            font-size: 0.75rem; /* Smaller contact details */
+        }
+        .btn-edit, .btn-danger {
+            padding: 6px 8px; /* Smaller action buttons */
+            font-size: 0.65rem;
+        }
+
+        /* Records Action button stacking */
+        .records-actions {
+            gap: 5px;
+        }
+        .records-actions > div {
+            flex-direction: column; /* Stack utility buttons vertically */
+            gap: 5px;
+        }
+        .btn-utility {
+            font-size: 0.85rem;
+            padding: 8px 12px;
+        }
+      }
+
+
       /* ======================================================= */
-/* === FOOTER STYLES === */
-/* ======================================================= */
-footer {
-    background-color: var(--primary); /* Deep green color from the header/theme */
-    color: var(--accent); /* Light contrasting color */
-    padding: 20px 20px;
-    text-align: center;
-    border-top: 5px solid var(--secondary); /* Accent line */
-    margin-top: 40px; /* Space between the main content and the footer */
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
+      /* === FOOTER STYLES === */
+      /* ======================================================= */
+      footer {
+        background-color: var(--primary); /* Deep green color from the header/theme */
+        color: var(--accent); /* Light contrasting color */
+        padding: 20px 20px;
+        text-align: center;
+        border-top: 5px solid var(--secondary); /* Accent line */
+        margin-top: 40px; /* Space between the main content and the footer */
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
 
-footer p {
-    margin: 0;
-    padding: 2px 0;
-    font-weight: 400;
-}
+      footer p {
+        margin: 0;
+        padding: 2px 0;
+        font-weight: 400;
+      }
 
-footer p:last-child {
-    font-weight: 600; /* Emphasize the developer name */
-    margin-top: 5px;
-    color: var(--white);
-}
+      footer p:last-child {
+        font-weight: 600; /* Emphasize the developer name */
+        margin-top: 5px;
+        color: var(--white);
+      }
 
-/* Ensure the footer looks good on smaller screens too (already covered by main styles, but good to check) */
-@media (max-width: 600px) {
-    footer {
-        padding: 15px 10px;
-        font-size: 0.85rem;
-    }
-}
+      /* Ensure the footer looks good on smaller screens too (already covered by main styles, but good to check) */
+      @media (max-width: 600px) {
+        footer {
+          padding: 15px 10px;
+          font-size: 0.8rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -468,8 +556,11 @@ footer p:last-child {
           <select id="filterSem" class="form-control" style="width: 150px">
             <option value="">Semester</option>
             <option>1st Sem</option>
+            <option>2nd Sem</option>
             <option>3rd Sem</option>
+            <option>4th Sem</option>
             <option>5th Sem</option>
+            <option>6th Sem</option>
           </select>
         </div>
 
@@ -606,19 +697,19 @@ footer p:last-child {
               : "No details";
 
           const row = `
-                    <tr>
-                        <td>#${student.rollNo}</td>
-                        <td style="font-weight: 500;">${student.name}</td>
-                        <td><span class="badge-sem">${
-                          student.semester || "N/A"
-                        }</span></td>
-                        <td>${details}</td>
-                        <td>
-                            <button class="btn btn-edit" onclick="editStudent(${originalIndex})"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-danger" onclick="deleteStudent(${originalIndex})"><i class="fas fa-trash"></i></button>
-                        </td>
-                    </tr>
-                `;
+              <tr>
+                <td>#${student.rollNo}</td>
+                <td style="font-weight: 500;">${student.name}</td>
+                <td><span class="badge-sem">${
+                  student.semester || "N/A"
+                }</span></td>
+                <td>${details}</td>
+                <td>
+                  <button class="btn btn-edit" onclick="editStudent(${originalIndex})"><i class="fas fa-edit"></i></button>
+                  <button class="btn btn-danger" onclick="deleteStudent(${originalIndex})"><i class="fas fa-trash"></i></button>
+                </td>
+              </tr>
+            `;
           tbody.innerHTML += row;
         });
       }
@@ -757,5 +848,3 @@ footer p:last-child {
     </footer>
   </body>
 </html>
-
-

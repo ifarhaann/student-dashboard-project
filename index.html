@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GCW Srinagar - Dashboard</title>
+
+    <!-- External Resources -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-container">
+        <div class="logo-img"></div>
+        <div class="logo-text">
+          <h1>GCW Srinagar</h1>
+          <p>Student Dashboard</p>
+        </div>
+      </div>
+      <div class="header-clock">
+        <div class="time" id="currentTime">Loading...</div>
+        <div class="date" id="currentDate">Loading...</div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-grid">
+        <!-- Registration Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-user-plus"></i>
+              Student Registration
+            </h2>
+          </div>
+          <div class="card-body">
+            <form id="studentForm">
+              <input type="hidden" id="editIndex" value="-1" />
+
+              <div class="form-group">
+                <label for="name" class="form-label">Full Name *</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control"
+                  placeholder="Ex: Mahrukh Zehra"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="rollNo" class="form-label">Roll Number *</label>
+                <input
+                  type="text"
+                  id="rollNo"
+                  class="form-control"
+                  placeholder="Ex: 2025001"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email ID</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Ex: student@college.edu"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-control"
+                  placeholder="Ex: 9858xxxxx"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="semester" class="form-label">Semester *</label>
+                <select id="semester" class="form-control" required>
+                  <option value="" disabled selected>Select Semester</option>
+                  <option value="1st Sem">1st Semester</option>
+                  <option value="2nd Sem">2nd Semester</option>
+                  <option value="3rd Sem">3rd Semester</option>
+                  <option value="4th Sem">4th Semester</option>
+                  <option value="5th Sem">5th Semester</option>
+                  <option value="6th Sem">6th Semester</option>
+                </select>
+              </div>
+
+              <div class="btn-group">
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                  <i class="fas fa-plus-circle"></i>
+                  Add Student
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  onclick="clearForm()"
+                >
+                  <i class="fas fa-eraser"></i>
+                  Clear Form
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Records Card -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">
+              <i class="fas fa-table"></i>
+              Student Records
+            </h2>
+          </div>
+          <div class="card-body">
+            <!-- Search and Filter -->
+            <div class="search-filter">
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control search-box"
+                placeholder="Search by Name or Roll No..."
+              />
+              <select id="filterSem" class="form-control filter-select">
+                <option value="">All Semesters</option>
+                <option>1st Sem</option>
+                <option>2nd Sem</option>
+                <option>3rd Sem</option>
+                <option>4th Sem</option>
+                <option>5th Sem</option>
+                <option>6th Sem</option>
+              </select>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+              <table class="student-table">
+                <thead>
+                  <tr>
+                    <th>Roll No</th>
+                    <th>Name</th>
+                    <th>Semester</th>
+                    <th>Contact Details</th>
+                    <th class="action-cell">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tableBody">
+                  <!-- Data will be inserted here -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state">
+              <i class="fas fa-users-slash"></i>
+              <h3>No Student Records</h3>
+              <p>Add students using the registration form.</p>
+            </div>
+
+            <!-- Records Actions -->
+            <div class="records-actions">
+              <button class="btn btn-outline" id="fetchApiBtn">
+                <i class="fas fa-cloud-download-alt"></i>
+                Load Sample Data
+              </button>
+              <button class="btn btn-outline" id="exportBtn">
+                <i class="fas fa-file-export"></i>
+                Export JSON Data
+              </button>
+              <button class="btn btn-danger" id="clearRecordsBtn">
+                <i class="fas fa-database"></i>
+                Clear All Records
+              </button>
+            </div>
+
+            <!-- Status Message -->
+            <div id="statusMessage" class="status-message"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p>&copy; 2023 GCW Srinagar Student Dashboard</p>
+        <p>All rights reserved</p>
+        <p>Developed with ❤️ by Team</p>
+        <p>Mehivish,Zainab,Musharaf,Muskaan</p>
+      </div>
+    </footer>
+
+    <!-- Local JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
